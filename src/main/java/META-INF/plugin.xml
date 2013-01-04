@@ -1,0 +1,17 @@
+<idea-plugin version="2" url="https://github.com/stokito/IdeaFactoryMethodInspection">
+    <name>Factory Method Inspection</name>
+    <id>FactoryMethodInspection</id>
+    <idea-version since-build="99.18" />
+    <category>Inspection</category>
+    <description>
+        <![CDATA[
+        <p>This inspection reports about (probably) inappropriate use of <a href="http://en.wikipedia.org/wiki/">Factory Method pattern</a>.</p>
+        <p>Please also see <a href="http://www.jpatterns.org/">JPatterns library</a> for patterns annotations.</p>
+    ]]>
+    </description>
+    <version>1.0</version>
+    <vendor email="stokito@gmail.com" url="http://stokito.blogspot.com/">Sergey Ponomarev</vendor>
+    <extensions defaultExtensionNs="com.intellij">
+        <inspectionToolProvider implementation="com.github.stokito.IdeaFactoryMethodInspection.FactoryMethodInspectionProvider"/>
+    </extensions>
+</idea-plugin>
