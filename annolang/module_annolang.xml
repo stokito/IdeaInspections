@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_annolang" default="compile.module.annolang">
+  <dirname property="module.annolang.basedir" file="${ant.file.module_annolang}"/>
+  
+  <property name="module.jdk.home.annolang" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.annolang" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.annolang" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.annolang" value="${compiler.args}"/>
+  
+  <property name="annolang.output.dir" value="${module.annolang.basedir}/out/production/annolang"/>
+  <property name="annolang.testoutput.dir" value="${module.annolang.basedir}/out/test/annolang"/>
+  
+  <path id="annolang.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="annolang.module.production.classpath">
+    <path refid="${module.jdk.classpath.annolang}"/>
+  </path>
+  
+  <path id="annolang.runtime.production.module.classpath">
+    <pathelement location="${annolang.output.dir}"/>
+  </path>
+  
+  <path id="annolang.module.classpath">
+    <path refid="${module.jdk.classpath.annolang}"/>
+    <pathelement location="${annolang.output.dir}"/>
+  </path>
+  
+  <path id="annolang.runtime.module.classpath">
+    <pathelement location="${annolang.testoutput.dir}"/>
+    <pathelement location="${annolang.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.annolang">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.annolang">
+    <patternset refid="excluded.from.module.annolang"/>
+  </patternset>
+  
+  <path id="annolang.module.sourcepath">
+    <dirset dir="${module.annolang.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.annolang" depends="compile.module.annolang.production,compile.module.annolang.tests" description="Compile module annolang"/>
+  
+  <target name="compile.module.annolang.production" depends="register.custom.compilers" description="Compile module annolang; production classes">
+    <mkdir dir="${annolang.output.dir}"/>
+    <javac2 destdir="${annolang.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.annolang}/javac">
+      <compilerarg line="${compiler.args.annolang}"/>
+      <bootclasspath refid="annolang.module.bootclasspath"/>
+      <classpath refid="annolang.module.production.classpath"/>
+      <src refid="annolang.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.annolang"/>
+    </javac2>
+    
+    <copy todir="${annolang.output.dir}">
+      <fileset dir="${module.annolang.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.annolang.tests" depends="register.custom.compilers,compile.module.annolang.production" description="compile module annolang; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.annolang" description="cleanup module">
+    <delete dir="${annolang.output.dir}"/>
+    <delete dir="${annolang.testoutput.dir}"/>
+  </target>
+</project>
