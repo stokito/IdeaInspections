@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="annolang" default="all">
+
+    <target name="clear">
+        <delete dir="build"/>
+        <mkdir dir="build"/>
+    </target>
+    <target name="build.annotation" depends="clear">
+        <javac srcdir="src/annotation" destdir="build" />
+    </target>
+    <target name="build.annotation.processor" depends="clear">
+        <javac srcdir="src/processor" destdir="build" />
+    </target>
+    <target name="build.test" depends="clear">
+        <javac srcdir="src/test" destdir="build" compiler=""/>
+    </target>
+
+    <target name="all" depends="build.annotation, build.annotation.processor, build.test" description="build all"/>
+</project>

@@ -1,0 +1,10 @@
+<idea-plugin version="2">
+  <name>Redunant Property Getting</name>
+  <description>Inspection for (probably) inappropriate call property getter, whithout use returning value.</description>
+  <version>1.0</version>
+  <idea-version since-build="98.01" />
+  <vendor>Sergey Ponomarev</vendor>
+  <extensions defaultExtensionNs="com.intellij">
+    <inspectionToolProvider implementation="org.github.stokito.RedunantPropertyGetting.RedunantPropertyGettingProvider"/>
+  </extensions>
+</idea-plugin>
